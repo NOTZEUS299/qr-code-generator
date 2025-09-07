@@ -1,5 +1,5 @@
 import { use, useState } from "react";
-import Input from "../../UI/Input";
+import Input from "../../ui/Input";
 import { QrContext } from "../../../store/qr-context";
 
 const QrForm = () => {

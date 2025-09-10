@@ -1,8 +1,9 @@
-import { use } from "react";
+import { use, useRef } from "react";
 import { QrContext } from "../../store/qr-context";
 
 const Input = ({ label, id, className, type = "text", children, ...props }) => {
   const { handleBasicChanges, handleSubChanges } = use(QrContext);
+  const debounceRef = useRef(null);
 
   const flexDirection =
     type === "text"
@@ -39,12 +40,18 @@ const Input = ({ label, id, className, type = "text", children, ...props }) => {
         ? handleBasicChanges(id, +value)
         : handleBasicChanges(id, value);
     } else {
-      const [key, subkey] = id.split(".");
-      if (type === "checkbox") {
-        handleBasicChanges("withBg", value);
-        handleSubChanges(key, subkey, "");
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
       }
-      handleSubChanges(key, subkey, value);
+      debounceRef.current = setTimeout(() => {
+        debounceRef.current = null;
+        const [key, subkey] = id.split(".");
+        if (type === "checkbox") {
+          handleBasicChanges("withBg", value);
+          handleSubChanges(key, subkey, "");
+        }
+        handleSubChanges(key, subkey, value);
+      }, 500);
     }
   };
 

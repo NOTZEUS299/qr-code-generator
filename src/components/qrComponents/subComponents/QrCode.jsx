@@ -11,17 +11,20 @@ const QrCode = () => {
   const [qrBorderRadius, setQrBorderRadius] = useState(qrContext.borderRadius);
 
   useEffect(() => {
+    qrCode.append(qrCodeRef.current);
+  }, []);
+
+  useEffect(() => {
     setQrBorderRadius(qrContext.borderRadius);
     qrCode.update(qrContext);
   }, [qrContext]);
 
-  useEffect(() => {
-    qrCode.append(qrCodeRef.current);
-  }, []);
+  const qrBorderRadiusClass = `rounded-[${qrBorderRadius}px]`;
 
   return (
     <div
-      className={`lg:sticky top-36 w-3xs aspect-square flex justify-center items-center rounded-[${qrBorderRadius}px] overflow-hidden`}
+      className={`lg:sticky top-36 w-3xs aspect-square flex justify-center items-center overflow-hidden ${qrBorderRadiusClass}`}
+      style={{ borderRadius: `${qrBorderRadius}%` }}
     >
       <div
         ref={qrCodeRef}

@@ -50,11 +50,11 @@ const Input = ({
         break;
 
       case "url":
-        try {
-          new URL(inputValue);
-        } catch {
-          errorMessage = "Please enter a valid URL";
-        }
+        // try {
+        //   // new URL(inputValue);
+        // } catch {
+        //   // errorMessage = "Please enter a valid URL";
+        // }
         break;
 
       case "number":
@@ -76,13 +76,6 @@ const Input = ({
           errorMessage = `${label} must be at least ${rules.minLength} characters`;
         } else if (rules.maxLength && inputValue.length > rules.maxLength) {
           errorMessage = `${label} must be no more than ${rules.maxLength} characters`;
-        }
-        break;
-
-      case "color":
-        const colorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-        if (!colorRegex.test(inputValue)) {
-          errorMessage = "Please enter a valid hex color";
         }
         break;
     }

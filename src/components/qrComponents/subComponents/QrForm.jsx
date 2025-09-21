@@ -3,7 +3,7 @@ import Input from "../../ui/Input";
 import { QrContext } from "../../../store/qr-context";
 
 const QrForm = () => {
-  const { qrContext } = use(QrContext);
+  const { qrDupContext } = use(QrContext);
   const {
     width,
     height,
@@ -19,7 +19,7 @@ const QrForm = () => {
     backgroundOptions,
     cornersSquareOptions,
     cornersDotOptions,
-  } = qrContext;
+  } = qrDupContext;
 
   const { errorCorrectionLevel } = qrOptions;
   const { margin: imageMargin } = imageOptions;

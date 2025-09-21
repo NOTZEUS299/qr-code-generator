@@ -12,7 +12,7 @@ const QrCode = () => {
   const [qrBorderRadius, setQrBorderRadius] = useState(qrContext.borderRadius);
 
   // Generate palettes (example: 5)
-  const palettes = generateColorPalettes(backgroundOptions.color, 500);
+  const palettes = generateColorPalettes(backgroundOptions.color, 49);
   console.log(palettes)
   useEffect(() => {
     // Create one QR instance per palette

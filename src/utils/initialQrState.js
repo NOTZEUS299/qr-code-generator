@@ -33,12 +33,12 @@ export const initialState = {
   cornersSquareOptions: {
     color: "#ffffff", // color of outer corner squares
     gradient: null,
-    type: "extra-rounded", // "square" | "dot" | "extra-rounded"
+    type: null, // "square" | "dot" | "extra-rounded" | null
   },
 
   cornersDotOptions: {
     color: "#ffffff", // color of inner corner dots
     gradient: null,
-    type: "dot", // "square" | "dot"
+    type: null, // "square" | "dot" | null
   },
 };

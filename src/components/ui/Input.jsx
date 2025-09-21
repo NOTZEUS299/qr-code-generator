@@ -15,7 +15,12 @@ const Input = ({
   onValidation,
   ...props
 }) => {
-  const { handleBasicChanges, handleSubChanges } = use(QrContext);
+  const {
+    handleBasicChanges,
+    handleSubChanges,
+    handleDupBasicChanges,
+    handleDupSubChanges,
+  } = use(QrContext);
   const debounceRef = useRef(null);
   const [error, setError] = useState("");
   const [value, setValue] = useState(props.value || props.defaultValue || "");
@@ -352,6 +357,27 @@ const Input = ({
         setError("An error occurred while processing the input");
       }
     }, 500);
+    try {
+      if (topLevelKeys.includes(id)) {
+        if (isNumber.includes(id)) {
+          // handleAspectChange(inputValue);
+        } else {
+          handleDupBasicChanges(id, inputValue);
+        }
+      } else {
+        const [key, subkey] = id.split(".");
+        if (!key || !subkey) {
+          return;
+        }
+
+        if (type === "checkbox") {
+          handleDupBasicChanges("withBg", inputValue);
+          handleDupSubChanges(key, subkey, "");
+        } else {
+          handleDupSubChanges(key, subkey, inputValue);
+        }
+      }
+    } catch (error) {}
   };
 
   return content;
